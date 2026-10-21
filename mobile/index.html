@@ -2,51 +2,35 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Мобильная версия FeedSystems</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Сайт в разработке — FeedSystems</title>
   <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../favicon.ico?v=2" sizes="32x32">
   <link rel="icon" href="../favicon.svg?v=2" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../apple-touch-icon.png?v=2">
   <style>
-    :root { --bg: #e9e9ec; --text: #333; --frame: #111; --chip: #fff; --chip-on: #141414; --chip-on-text: #fff; }
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) { --bg: #1c1c1e; --text: #ddd; --frame: #000; --chip: #2c2c2e; --chip-on: #fff; --chip-on-text: #141414; }
+    html, body { margin: 0; height: 100%; background: #0b0b0b; overflow: hidden; }
+    iframe {
+      display: block;
+      width: 100%;
+      max-width: 390px;
+      height: 100vh;
+      height: 100dvh;
+      margin: 0 auto;
+      border: 0;
+      background: #121212;
     }
-    :root[data-theme="dark"] { --bg: #1c1c1e; --text: #ddd; --frame: #000; --chip: #2c2c2e; --chip-on: #fff; --chip-on-text: #141414; }
-    * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
-      font: 14px/1.4 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 20px 16px 32px; }
-    .sizes { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-    .sizes button { border: 0; border-radius: 999px; padding: 8px 14px; background: var(--chip); color: inherit; font: inherit; cursor: pointer; }
-    .sizes button[aria-pressed="true"] { background: var(--chip-on); color: var(--chip-on-text); }
-    .phone { padding: 12px; border-radius: 44px; background: var(--frame); box-shadow: 0 20px 50px rgba(0,0,0,.3); max-width: 100%; }
-    iframe { display: block; border: 0; border-radius: 32px; background: #121212; max-width: 100%; }
   </style>
 </head>
 <body>
-  <div class="sizes" role="group" aria-label="Размер экрана">
-    <button type="button" data-w="320" data-h="568">320×568</button>
-    <button type="button" data-w="375" data-h="812">375×812</button>
-    <button type="button" data-w="390" data-h="844" aria-pressed="true">390×844</button>
-    <button type="button" data-w="430" data-h="932">430×932</button>
-  </div>
-  <div class="phone">
-    <iframe id="screen" src="../index.html" width="390" height="844" title="feedsystems.ru — мобильная версия"></iframe>
-  </div>
+  <iframe id="screen" src="../index.html" title="Сайт в разработке — FeedSystems"></iframe>
   <script>
+    // Внешние сайты обычно запрещают открывать себя внутри iframe,
+    // поэтому ссылки на них открываем на всё окно.
     const f = document.getElementById('screen');
-    // Внешние сайты обычно запрещают открывать себя внутри рамки (iframe),
-    // поэтому в предпросмотре открываем такие ссылки в новой вкладке.
     f.addEventListener('load', () => {
-      f.contentDocument.querySelectorAll('a[href^="http"]').forEach(a => {
-        a.target = '_blank';
-        a.rel = 'noopener';
-      });
+      f.contentDocument.querySelectorAll('a[href^="http"]').forEach(a => { a.target = '_top'; });
     });
-    document.querySelectorAll('.sizes button').forEach(b => b.addEventListener('click', () => {
-      document.querySelectorAll('.sizes button').forEach(x => x.setAttribute('aria-pressed', x === b));
-      f.width = b.dataset.w; f.height = b.dataset.h;
-    }));
   </script>
 </body>
 </html>
