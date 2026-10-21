@@ -1,0 +1,315 @@
+/* FeedSystems — страница-заглушка */
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("../fonts/manrope-cyrillic-wght-normal.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("../fonts/manrope-latin-wght-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  --c-bg: #121212;
+  --c-text: #ffffff;
+  --c-text-muted: rgba(255, 255, 255, 0.86);
+  --c-btn-text: #141414;
+
+  /* Горизонтальные поля страницы */
+  --gutter: clamp(24px, 5.6vw, 108px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background-color: var(--c-bg);
+  color: var(--c-text);
+  font-family: "Manrope", "Segoe UI", Roboto, Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ---------- Фон ---------- */
+
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background-color: var(--c-bg);
+}
+
+.bg__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 50%;
+}
+
+/* Адаптивное затемнение: плотное слева под текстом, светлее справа над оборудованием */
+.bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg,
+      rgba(12, 12, 12, 0.92) 0%,
+      rgba(12, 12, 12, 0.84) 30%,
+      rgba(12, 12, 12, 0.6) 52%,
+      rgba(12, 12, 12, 0.18) 72%,
+      rgba(12, 12, 12, 0.12) 100%),
+    linear-gradient(0deg,
+      rgba(12, 12, 12, 0.55) 0%,
+      rgba(12, 12, 12, 0) 35%);
+}
+
+/* ---------- Каркас ---------- */
+
+.page {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding:
+    max(clamp(28px, 6vh, 64px), env(safe-area-inset-top))
+    max(var(--gutter), env(safe-area-inset-right))
+    max(clamp(32px, 8vh, 96px), env(safe-area-inset-bottom))
+    max(var(--gutter), env(safe-area-inset-left));
+}
+
+.header {
+  flex: none;
+}
+
+.logo {
+  width: clamp(200px, 17vw, 330px);
+  height: auto;
+}
+
+.hero {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 760px;
+  padding-top: clamp(48px, 9vh, 120px);
+}
+
+.hero__title {
+  margin: 0;
+  font-size: clamp(40px, 4.2vw, 80px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.hero__text {
+  margin: clamp(20px, 2.2vw, 36px) 0 0;
+  max-width: 31em;
+  font-size: clamp(16px, 1.15vw, 22px);
+  line-height: 1.6;
+  color: var(--c-text-muted);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px clamp(28px, 2.4vw, 44px);
+  margin-top: clamp(32px, 3.4vw, 56px);
+}
+
+/* ---------- Кнопка ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: clamp(56px, 3.7vw, 70px);
+  padding: 0 clamp(36px, 2.6vw, 48px);
+  border-radius: 999px;
+  background-color: #ffffff;
+  color: var(--c-btn-text);
+  font-size: clamp(16px, 1.05vw, 20px);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #ececec;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* ---------- Контакты ---------- */
+
+.contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contacts__link {
+  display: inline-block;
+  padding: 4px 0;
+  color: var(--c-text);
+  font-size: clamp(16px, 1.05vw, 20px);
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  white-space: nowrap;
+}
+
+.contacts__link:hover {
+  text-decoration-line: underline;
+}
+
+.btn:focus-visible,
+.contacts__link:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 4px;
+}
+
+/* ---------- Мобильная версия ---------- */
+
+@media (max-width: 767px) {
+  :root {
+    --gutter: clamp(24px, 7vw, 32px);
+  }
+
+  .br-wide {
+    display: none;
+  }
+
+  .bg__img {
+    object-position: 50% 50%;
+  }
+
+  .bg::after {
+    background:
+      linear-gradient(180deg,
+        rgba(12, 12, 12, 0.82) 0%,
+        rgba(12, 12, 12, 0.7) 45%,
+        rgba(12, 12, 12, 0.6) 70%,
+        rgba(12, 12, 12, 0.72) 100%);
+  }
+
+  .page {
+    padding-top: max(36px, env(safe-area-inset-top));
+    padding-bottom: max(40px, env(safe-area-inset-bottom));
+  }
+
+  .logo {
+    width: clamp(188px, 56vw, 232px);
+  }
+
+  .hero {
+    justify-content: flex-start;
+    padding-top: clamp(56px, 12vh, 120px);
+  }
+
+  .hero__title {
+    font-size: clamp(32px, 9.6vw, 44px);
+    line-height: 1.1;
+  }
+
+  .hero__text {
+    font-size: clamp(15px, 4.3vw, 18px);
+    margin-top: 20px;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 28px;
+    margin-top: 36px;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 420px;
+    min-height: 58px;
+    padding: 0 24px;
+  }
+
+  .contacts {
+    gap: 10px;
+  }
+
+  .contacts__link {
+    font-size: 18px;
+  }
+}
+
+/* Компактные телефоны (320×568) */
+@media (max-width: 767px) and (max-height: 640px) {
+  .page {
+    padding-top: max(28px, env(safe-area-inset-top));
+    padding-bottom: max(28px, env(safe-area-inset-bottom));
+  }
+
+  .hero {
+    padding-top: 44px;
+  }
+}
+
+/* Невысокие экраны (ноутбуки 1280×720, телефоны в альбомной ориентации) */
+@media (min-width: 768px) and (max-height: 760px) {
+  .page {
+    padding-top: 32px;
+    padding-bottom: 40px;
+  }
+
+  .hero {
+    padding-top: 40px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn {
+    transition: none;
+  }
+}
